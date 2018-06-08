@@ -1,0 +1,21 @@
+{
+  "name": "okra",
+  "version": "1.0.0",
+  "description": "Lesson planning done easy",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./public/index.html",
+    "test": "test"
+  },
+  "author": "@brodeynewman",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "parcel-bundler": "^1.8.1"
+  }
+}
