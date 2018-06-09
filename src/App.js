@@ -1,7 +1,12 @@
 import React from 'react';
+import UserProvider from './components/UserProvider/UserProvider';
 
 const App = () => (
-  <div>Hello Rachel</div>
+  <div>
+    <UserProvider>
+
+    </UserProvider>
+  </div>
 );
 
 export default App;
