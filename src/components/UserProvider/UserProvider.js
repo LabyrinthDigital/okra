@@ -3,11 +3,11 @@ import React, { createContext, Component } from 'react';
 const user = {
   isLoggedIn: false,
   actions: {
-    logUserIn: f => f,
+    handleUserLogin: f => f,
   },
 };
 
-const UserContext = createContext(user);
+export const UserContext = createContext(user);
 
 class UserProvider extends Component {
   state = {

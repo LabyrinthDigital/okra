@@ -1,11 +1,17 @@
 import React from 'react';
-import UserProvider from './components/UserProvider/UserProvider';
+import { BrowserRouter } from "react-router-dom";
+import { UserContext } from './components/UserProvider/UserProvider';
+import Router from './routes';
 
 const App = () => (
   <div>
-    <UserProvider>
-
-    </UserProvider>
+    <UserContext.Consumer>
+      {value => (
+        <BrowserRouter>
+          <Router {...value} />
+        </BrowserRouter>
+      )}
+    </UserContext.Consumer>
   </div>
 );
 
