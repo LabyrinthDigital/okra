@@ -4,5 +4,5 @@ import Login from './Login';
 export default {
   exact: true,
   path: '/login',
-  render: () => <Login />,
+  Component: Login,
 };
