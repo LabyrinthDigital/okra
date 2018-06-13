@@ -10,7 +10,10 @@
   "author": "@brodeynewman",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^1.2.1",
+    "@material-ui/icons": "^1.1.0",
     "lodash": "^4.17.10",
+    "material-ui": "^0.20.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
@@ -23,6 +26,7 @@
     "babel-plugin-lodash": "^3.3.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "eslint-config-airbnb": "^16.1.0",
     "parcel-bundler": "^1.8.1",
     "v": "^0.3.0"
   }

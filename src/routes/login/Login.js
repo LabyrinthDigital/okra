@@ -8,7 +8,7 @@ class Login extends Component {
     const { isLoggedIn } = this.props;
 
     if (isLoggedIn) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/" />;
     }
 
     return (
