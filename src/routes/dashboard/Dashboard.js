@@ -3,19 +3,28 @@ import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../../components/Sidebar';
 
 const styles = {
-  sideBar: {
-    padding: 20,
-    width: 250,
-  },
+  
 };
 
 class Dashboard extends Component {
+  state = {
+    isSidebarOpen: false,
+  }
+
+  handleToggleSidebar = () => this.setState(prevState => ({
+    isSidebarOpen: !prevState.isSidebarOpen,
+  }));
+
   render() {
+    const { isSidebarOpen } = this.state;
     const { classes } = this.props;
 
     return (
       <div className={classes.sideBar}>
-        <Sidebar />
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          onToggleSidebar={this.handleToggleSidebar}
+        />
       </div>
     );
   }
