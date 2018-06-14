@@ -1,11 +1,13 @@
 import React from 'react';
 import './styles/index.css';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import Router from './routes';
 
 const App = () => (
   <BrowserRouter>
-    <Router />
+    <Switch>
+      <Router />
+    </Switch>
   </BrowserRouter>
 );
 

@@ -7,10 +7,6 @@ class Login extends Component {
   render() {
     const { isLoggedIn } = this.props;
 
-    if (isLoggedIn) {
-      return <Redirect to="/" />;
-    }
-
     return (
       <div>
         <button onClick={this.props.onLogin}>Click to log in</button>

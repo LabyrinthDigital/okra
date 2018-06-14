@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../../components/Sidebar';
+import ContentContainer from './ContentContainer';
+import SidebarDrawer from '../../components/Sidebar/SidebarDrawer';
 
 const styles = {
   
@@ -19,12 +22,18 @@ class Dashboard extends Component {
     const { isSidebarOpen } = this.state;
     const { classes } = this.props;
 
+    console.log('hello');
+
     return (
       <div className={classes.sideBar}>
         <Sidebar
           isSidebarOpen={isSidebarOpen}
           onToggleSidebar={this.handleToggleSidebar}
         />
+        <SidebarDrawer isSidebarOpen={isSidebarOpen}>
+          <Link to="/lessons">Lessons</Link>
+        </SidebarDrawer>
+        <ContentContainer isSidebarOpen={isSidebarOpen} />
       </div>
     );
   }
