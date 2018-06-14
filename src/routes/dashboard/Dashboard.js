@@ -1,42 +1,43 @@
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../../components/Sidebar';
 import ContentContainer from './ContentContainer';
 import SidebarDrawer from '../../components/Sidebar/SidebarDrawer';
+import handleToggleIsSidebarOpen from '../../redux/actions/toggleSidebar';
 
 const styles = {
   
 };
 
-class Dashboard extends Component {
-  state = {
-    isSidebarOpen: false,
-  }
+const Dashboard = props => {
+  const { classes, onToggleIsSidebarOpen, isSidebarOpen } = props;
 
-  handleToggleSidebar = () => this.setState(prevState => ({
-    isSidebarOpen: !prevState.isSidebarOpen,
-  }));
+  console.log('hello', isSidebarOpen);
 
-  render() {
-    const { isSidebarOpen } = this.state;
-    const { classes } = this.props;
-
-    console.log('hello');
-
-    return (
-      <div className={classes.sideBar}>
-        <Sidebar
-          isSidebarOpen={isSidebarOpen}
-          onToggleSidebar={this.handleToggleSidebar}
-        />
-        <SidebarDrawer isSidebarOpen={isSidebarOpen}>
-          <Link to="/lessons">Lessons</Link>
-        </SidebarDrawer>
-        <ContentContainer isSidebarOpen={isSidebarOpen} />
-      </div>
-    );
-  }
+  return (
+    <div className={classes.sideBar}>
+      <Sidebar
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={onToggleIsSidebarOpen(isSidebarOpen)}
+      />
+      <SidebarDrawer isSidebarOpen={isSidebarOpen}>
+        <Link to="/lessons">Lessons</Link>
+      </SidebarDrawer>
+      <ContentContainer isSidebarOpen={isSidebarOpen} />
+    </div>
+  );
 }
 
-export default withStyles(styles)(Dashboard);
+const mapStateToProps = ({ isSidebarOpen }) => ({
+  isSidebarOpen,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onToggleIsSidebarOpen: currentState => () => dispatch(handleToggleIsSidebarOpen(!currentState)),
+});
+
+const SidebarWithStyles = withStyles(styles)(Dashboard);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarWithStyles);

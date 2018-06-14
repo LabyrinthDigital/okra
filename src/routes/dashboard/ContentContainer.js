@@ -1,9 +1,7 @@
 import cn from 'classnames';
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import DashboardRouter from './subroutes';
-import Lessons from './subroutes/lessons/Lessons';
 
 const styles = {
   contentContainer: {
@@ -22,8 +20,7 @@ const ContentContainer = props => {
     <div className={cn(classes.contentContainer, {
       [classes.sidebarIsOpen]: isSidebarOpen,
     })}>
-      lol
-      <Route path="/lessons" component={Lessons} />
+      <DashboardRouter />
     </div>
   );
 }

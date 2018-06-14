@@ -1,6 +1,6 @@
 import fp from 'lodash/fp';
 import React, { Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import lessons from './lessons';
 
 const routes = [
@@ -12,11 +12,7 @@ const mapRoutesToRouteComponent = fp.map(route => <Route key={route.path} {...ro
 const ContentContainer = props => {
   console.log(props);
 
-  return (
-    <Switch>
-      {mapRoutesToRouteComponent(routes)} 
-    </Switch>
-  );
+  return mapRoutesToRouteComponent(routes);
 }
 
 export default ContentContainer;

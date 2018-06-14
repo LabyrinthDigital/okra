@@ -7,9 +7,9 @@ const Authenticated = (ComposedComponent) => {
     render() {
       const { isLoggedIn } = this.props;
 
-      if (!isLoggedIn) {
-        return <Redirect to="/login" />;
-      }
+      // if (!isLoggedIn) {
+      //   return <Redirect to="/login" />;
+      // }
     
       return <ComposedComponent {...this.props} />;
     }
