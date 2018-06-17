@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Titlebar from '../../../../components/Titlebar';
 
 const styles = {};
 
@@ -10,7 +11,7 @@ const Lessons = props => {
 
   return (
     <div>
-      lessons
+      <Titlebar />
     </div>
   );
 };

@@ -6,10 +6,10 @@ import DashboardRouter from './subroutes';
 const styles = {
   contentContainer: {
     transition: 'all .2s ease',
-    padding: '15px 15px 15px 85px',
+    paddingLeft: 75,
   },
   sidebarIsOpen: {
-    padding: '15px 15px 15px 340px',
+    paddingLeft: 325,
   },
 };
 

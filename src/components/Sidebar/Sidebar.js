@@ -6,12 +6,22 @@ import { withStyles } from '@material-ui/core/styles';
 import SidebarDrawer from './SidebarDrawer';
 
 const styles = {
+  profile: {
+    backgroundColor: '#E85B5D',
+    padding: 15,
+    height: 40,
+    fontSize: 12,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#fff',
+  },
   sideBar: {
     width: 75,    
     transition: 'all .2s ease',
     position: 'fixed',
     height: '100vh',
-    backgroundColor: '#475A64',
+    backgroundColor: '#323543',
     zIndex: 99,
   },
   arrowForward: {
@@ -22,7 +32,7 @@ const styles = {
     height: 50,
     display: 'flex',
     borderTop: '1px solid #ddd',
-    backgroundColor: '#475A64',
+    backgroundColor: '#323543',
   },
   forwardButton: {
     minWidth: '100%',
@@ -36,7 +46,7 @@ const Sidebar = props => {
 
   return (
     <div className={classes.sideBar}>
-      sidebar
+      <div className={classes.profile}>Profile</div>
       <div className={classes.arrowForward}>
         <Button onClick={onToggleSidebar} className={classes.forwardButton}>
           {

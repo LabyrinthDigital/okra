@@ -14,8 +14,6 @@ const styles = {
 const Dashboard = props => {
   const { classes, onToggleIsSidebarOpen, isSidebarOpen } = props;
 
-  console.log('hello', isSidebarOpen);
-
   return (
     <div className={classes.sideBar}>
       <Sidebar
@@ -35,7 +33,8 @@ const mapStateToProps = ({ isSidebarOpen }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onToggleIsSidebarOpen: currentState => () => dispatch(handleToggleIsSidebarOpen(!currentState)),
+  onToggleIsSidebarOpen: currentState =>
+    () => dispatch(handleToggleIsSidebarOpen(!currentState)),
 });
 
 const SidebarWithStyles = withStyles(styles)(Dashboard);
