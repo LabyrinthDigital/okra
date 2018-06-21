@@ -1,4 +1,5 @@
 import React from 'react';
+import fp from 'lodash/fp';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,11 +24,6 @@ const styles = {
     borderRadius: '100%',
     color: '#fff',
   },
-  icon: {
-    fontSize: 14,
-    color: '#fff',
-    cursor: 'pointer',
-  },
   title: {
     flex: 1,
     textAlign: 'left',
@@ -35,8 +31,17 @@ const styles = {
   },
 };
 
+const mapIcons = classes => fp.map(icon => (
+  <div key={icon.id} className={icon.containerClasses || classes.iconBox}>
+    <icon.Component
+      onClick={icon.onClick}
+      className={icon.className}
+    />
+  </div>
+));
+
 const Titlebar = props => {
-  const { classes } = props;
+  const { classes, icons = [] } = props;
 
   return (
     <AppBar className={classes.root} position="static">
@@ -45,9 +50,7 @@ const Titlebar = props => {
           Lessons
         </Typography>
         <Typography>
-          <div className={classes.iconBox}>
-            <AddCircleOutline className={classes.icon} />
-          </div>
+          {mapIcons(classes)(icons)}
         </Typography>
       </Toolbar>
     </AppBar>

@@ -10,8 +10,6 @@ const routes = [
 const mapRoutesToRouteComponent = fp.map(route => <Route key={route.path} {...route} />);
 
 const ContentContainer = props => {
-  console.log(props);
-
   return mapRoutesToRouteComponent(routes);
 }
 
