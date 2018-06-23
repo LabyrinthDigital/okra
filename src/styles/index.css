@@ -4,3 +4,7 @@ body {
   background-color: #fafafa; 
   font-family: 'Khula', sans-serif !important;
 }
+
+.Select-menu-outter {
+  z-index: 999;
+}

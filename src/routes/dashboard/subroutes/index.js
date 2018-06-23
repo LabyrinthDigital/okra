@@ -1,10 +1,10 @@
 import fp from 'lodash/fp';
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
-import lessons from './lessons';
+import categories from './categories';
 
 const routes = [
-  lessons,
+  categories,
 ];
 
 const mapRoutesToRouteComponent = fp.map(route => <Route key={route.path} {...route} />);

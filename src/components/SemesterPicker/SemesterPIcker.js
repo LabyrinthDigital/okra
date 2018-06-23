@@ -1,16 +1,21 @@
 import React, { Fragment } from 'react';
 import fp from 'lodash/fp';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import Select from 'react-select';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   root: {
     width: '100%',
+    padding: 10,
   },
 };
 
 const YEAR_RANGE = 25;
+
+const mapDatesToOptionObject = fp.map(date => [
+  { value: `01/${date}`, label: `Fall semester ${date}` },
+  { value: `08/${date}`, label: `Spring semester ${date}` },
+]);
 
 const createMenuOptionsForDates = (date) => {
   const dates = [];
@@ -25,26 +30,19 @@ const createMenuOptionsForDates = (date) => {
 const SemesterPicker = props => {
   const { classes } = props;
 
-  const dates = createMenuOptionsForDates(new Date().getFullYear());
-
   console.log(props.value);
 
   return (
-    <TextField
-      select
-      label="Semester"
+    <Select
+      name="Semester"
       className={classes.input}
+      options={fp.compose(
+        fp.flatten,
+        mapDatesToOptionObject,
+        createMenuOptionsForDates
+      )(new Date().getFullYear())}
       {...props}
-    >
-      {
-        dates.map(date => (
-          <Fragment key={date}>
-            <MenuItem value={`01/${date}`}>{`Spring semester ${date}`}</MenuItem>
-            <MenuItem value={`08/${date}`}>{`Fall semester ${date}`}</MenuItem>
-          </Fragment>
-        ))
-      }
-    </TextField>
+    />
   );
 }
 

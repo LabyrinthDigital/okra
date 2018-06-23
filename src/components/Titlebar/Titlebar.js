@@ -2,6 +2,7 @@ import React from 'react';
 import fp from 'lodash/fp';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
@@ -33,21 +34,33 @@ const styles = {
 
 const mapIcons = classes => fp.map(icon => (
   <div key={icon.id} className={icon.containerClasses || classes.iconBox}>
-    <icon.Component
-      onClick={icon.onClick}
-      className={icon.className}
-    />
+    {
+      icon.toolTipContent
+      ? (
+        <Tooltip title={icon.toolTipContent} placement="bottom-end">
+          <icon.Component
+            onClick={icon.onClick}
+            className={icon.className}
+          />
+        </Tooltip>
+      ) : (
+        <icon.Component
+          onClick={icon.onClick}
+          className={icon.className}
+        />
+      )
+    }
   </div>
 ));
 
 const Titlebar = props => {
-  const { classes, icons = [] } = props;
+  const { classes, icons = [], title = "Title" } = props;
 
   return (
     <AppBar className={classes.root} position="static">
       <Toolbar className={classes.titleBar}>
         <Typography className={classes.title}>
-          Lessons
+          {title}
         </Typography>
         <Typography>
           {mapIcons(classes)(icons)}
