@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import Button from '@material-ui/core/Button';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import ArrowBack from '@material-ui/icons/ArrowBack';
@@ -18,6 +19,14 @@ const styles = {
   },
   sideBar: {
     width: 75,    
+    transition: 'all .2s ease',
+    position: 'fixed',
+    height: '100vh',
+    backgroundColor: '#323543',
+    zIndex: 99,
+  },
+  sideBarIsOpen: {
+    width: 225,    
     transition: 'all .2s ease',
     position: 'fixed',
     height: '100vh',
@@ -45,7 +54,10 @@ const Sidebar = props => {
   const { classes, isSidebarOpen, onToggleSidebar } = props;
 
   return (
-    <div className={classes.sideBar}>
+    <div className={cn(classes.sideBar,
+      cn({ [classes.sideBarIsOpen]: isSidebarOpen,
+      }))
+    }>
       <div className={classes.profile}>Profile</div>
       <div className={classes.arrowForward}>
         <Button onClick={onToggleSidebar} className={classes.forwardButton}>

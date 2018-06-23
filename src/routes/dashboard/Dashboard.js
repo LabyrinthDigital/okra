@@ -20,9 +20,6 @@ const Dashboard = props => {
         isSidebarOpen={isSidebarOpen}
         onToggleSidebar={onToggleIsSidebarOpen(isSidebarOpen)}
       />
-      <SidebarDrawer isSidebarOpen={isSidebarOpen}>
-        <Link to="/lessons">Lessons</Link>
-      </SidebarDrawer>
       <ContentContainer isSidebarOpen={isSidebarOpen} />
     </div>
   );

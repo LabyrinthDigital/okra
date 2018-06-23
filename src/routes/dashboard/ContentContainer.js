@@ -9,7 +9,7 @@ const styles = {
     paddingLeft: 75,
   },
   sidebarIsOpen: {
-    paddingLeft: 325,
+    paddingLeft: 225,
   },
 };
 
