@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../../components/Sidebar';
 import ContentContainer from './ContentContainer';
-import SidebarDrawer from '../../components/Sidebar/SidebarDrawer';
 import handleToggleIsSidebarOpen from '../../redux/actions/toggleSidebar';
 
 const styles = {

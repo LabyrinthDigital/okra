@@ -29,6 +29,7 @@ const styles = {
     flex: 1,
     textAlign: 'left',
     fontSize: 16,
+    fontWeight: 700,
   },
 };
 

@@ -1,10 +1,17 @@
 import React from 'react';
+import fp from 'lodash/fp';
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
+import Today from '@material-ui/icons/Today';
 import Button from '@material-ui/core/Button';
-import ArrowForward from '@material-ui/icons/ArrowForward';
+import Subject from '@material-ui/icons/Subject';
+import Settings from '@material-ui/icons/Settings';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { withStyles } from '@material-ui/core/styles';
-import SidebarDrawer from './SidebarDrawer';
+import ViewAgenda from '@material-ui/icons/ViewAgenda';
+import ViewModule from '@material-ui/icons/ViewModule';
+import InsertChart from '@material-ui/icons/InsertChart';
+import ArrowForward from '@material-ui/icons/ArrowForward';
 
 const styles = {
   profile: {
@@ -48,7 +55,86 @@ const styles = {
     borderRadius: 0,
     color: '#ddd',
   },
+  icon: {
+    color: '#6A7582',
+    height: 25,
+  },
+  link: {
+    transition: 'all .5s ease',
+    display: 'flex',
+    alignItems: 'center',
+    padding: 15,
+    height: 40,
+    justifyContent: 'center',
+    '&:hover': {
+      backgroundColor: '#1e202c',
+    },
+    color: '#6A7582',
+    textDecoration: 'none',
+  },
+  sidebarIsOpenLink: {
+    justifyContent: 'inherit',
+  },
+  activeLink: {
+    backgroundColor: '#1e202c',
+  },
+  iconTitle: {
+    marginLeft: 25,
+    marginTop: 5,
+    fontSize: 12,
+  },
 };
+
+const links = [
+  {
+    to: "/",
+    exact: true,
+    title: "Dashboard",
+    Link: InsertChart,
+  },
+  {
+    title: "Semesters",
+    to: "/semesters",
+    Link: ViewAgenda,
+  },
+  {
+    title: "Classes",
+    to: "/classes",
+    Link: Subject,
+  },
+  {
+    title: "Topics",
+    to: "/topics",
+    Link: ViewModule
+  },
+  {
+    title: "Days",
+    to: "/days",
+    Link: Today
+  },
+  {
+    title: "Settings",
+    to: "/settings",
+    Link: Settings,
+  },
+];
+
+const mapLinksToNavLinks = ({ isSidebarOpen }) =>
+  classes => fp.map(({ Link, to, exact, title }) => (
+    <NavLink
+      exact={exact}
+      activeClassName={classes.activeLink}
+      to={to}
+      className={cn(classes.link, ({
+        [classes.sidebarIsOpenLink]: isSidebarOpen,
+      }))}
+    >
+      <Link className={classes.icon} />
+      {isSidebarOpen && 
+        <span className={classes.iconTitle}>{title}</span>
+      }
+    </NavLink>
+  ));
 
 const Sidebar = props => {
   const { classes, isSidebarOpen, onToggleSidebar } = props;
@@ -59,6 +145,7 @@ const Sidebar = props => {
       }))
     }>
       <div className={classes.profile}>Profile</div>
+      {mapLinksToNavLinks(props)(classes)(links)}
       <div className={classes.arrowForward}>
         <Button onClick={onToggleSidebar} className={classes.forwardButton}>
           {

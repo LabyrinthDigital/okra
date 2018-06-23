@@ -6,8 +6,6 @@ const styles = {
 };
 
 const Loading = ({ style, classes }) => {
-  console.log(classes);
-
   return (<CircularProgress
     style={style}
     className={classes.progress}

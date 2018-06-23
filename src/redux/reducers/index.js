@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import login from './login';
 import toggleSidebar from './toggleSidebar';
-import semesterCategories from './semesterCategories';
+import semesterClasses from './semesterClasses';
 
 export default combineReducers({
   isLoggedIn: login,
-  semesterCategories,  
+  semesterClasses,  
   isSidebarOpen: toggleSidebar,
 });

@@ -30,8 +30,6 @@ const createMenuOptionsForDates = (date) => {
 const SemesterPicker = props => {
   const { classes } = props;
 
-  console.log(props.value);
-
   return (
     <Select
       name="Semester"

@@ -2,35 +2,37 @@ import fp from 'lodash/fp';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Category from './Category';
+import ClassComponent from './Class';
 
 const styles = {
   root: {
     padding: 25,
+    display: 'flex',
+    flexWrap: 'wrap',
   },
 };
 
-const mapCategoriesToCategory = fp.map(category => (
-  <Category
+const mapClassesToClassComponent = fp.map(category => (
+  <ClassComponent
     key={category.id}
-    semester={category.date}
+    date={category.date}
     name={category.name}
     description={category.description}
   />
 ));
 
 const CategoryContainer = props => {
-  const { classes, semesterCategories } = props;
+  const { classes, semesterClasses } = props;
 
   return (
     <div className={classes.root}>
-      {mapCategoriesToCategory(semesterCategories)}
+      {mapClassesToClassComponent(semesterClasses)}
     </div>
   );
 };
 
-const mapStateToProps = ({ semesterCategories }) => ({
-  semesterCategories,
+const mapStateToProps = ({ semesterClasses }) => ({
+  semesterClasses,
 });
 
 export default fp.compose(

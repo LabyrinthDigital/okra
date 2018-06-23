@@ -9,7 +9,7 @@ import { getCurrentSemester } from '../../../../utils';
 import WithModal from '../../../../components/HOC/WithModal';
 import WithToast from '../../../../components/HOC/WithToast';
 import SemesterPicker from '../../../../components/SemesterPicker';
-import AddSemesterCategory from '../../../../redux/actions/AddSemesterCategory';
+import addClassToSemester from '../../../../redux/actions/addClassToSemester';
 
 const styles = {
   form: {
@@ -58,7 +58,7 @@ class CreateLessonForm extends Component {
   }
 
   handleSubmit = async () => {
-    const { addCategory, onToast, onModalClose } = this.props;
+    const { addClass, onToast, onModalClose } = this.props;
     const {
       selectedSemester,
       categoryName,
@@ -68,7 +68,7 @@ class CreateLessonForm extends Component {
     this.setState({ isSubmitting: true });
 
     setTimeout(() => {
-      addCategory({
+      addClass({
         name: categoryName,
         date: selectedSemester.value,
         description: categoryDescription,
@@ -92,8 +92,6 @@ class CreateLessonForm extends Component {
   render() {
     const { classes, onModalClose, addCategory } = this.props;
     const { selectedSemester, isSubmitting } = this.state;
-
-    console.log(this.props);
 
     return (
       <div className={classes.form}>
@@ -130,7 +128,7 @@ class CreateLessonForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addCategory: category => dispatch(AddSemesterCategory(category)),
+  addClass: category => dispatch(addClassToSemester(category)),
 });
 
 export default fp.compose(
