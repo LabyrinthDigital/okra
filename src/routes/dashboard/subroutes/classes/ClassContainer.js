@@ -12,12 +12,10 @@ const styles = {
   },
 };
 
-const mapClassesToClassComponent = fp.map(category => (
+const mapClassesToClassComponent = fp.map(classObject => (
   <ClassComponent
-    key={category.id}
-    date={category.date}
-    name={category.name}
-    description={category.description}
+    key={classObject.id}
+    {...classObject}
   />
 ));
 

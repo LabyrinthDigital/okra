@@ -1,8 +1,8 @@
+import fp from 'lodash/fp';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
-import ClassContainer from './ClassContainer';
-import CreateClassForm from './CreateClassForm';
 import Titlebar from '../../../../components/Titlebar';
 
 const styles = {
@@ -13,7 +13,7 @@ const styles = {
   },
 };
 
-class Classes extends Component {
+class Topics extends Component {
   state = { isModalOpen: false };
 
   get icons() {
@@ -22,10 +22,20 @@ class Classes extends Component {
     return [
       {
         id: 1,
-        toolTipContent: "Add class",
+        toolTipContent: "Add topics",
         Component: AddCircleOutline,
         className: classes.icon,
         onClick: this.handleIconClick, 
+      }
+    ];
+  }
+
+  get breadCrumbs() {
+    const { id } = this.props;
+
+    return [
+      {
+        
       }
     ];
   }
@@ -38,18 +48,20 @@ class Classes extends Component {
     const { isModalOpen } = this.state;
     const { classes } = this.props;
 
+    console.log('lel', this.props);
+
     return (
       <div>
-        <Titlebar title="Classes" icons={this.icons} />
-        <ClassContainer />
-        <CreateClassForm
-          open={isModalOpen} 
-          onModalClose={this.handleIconClick}
-          title="Create a new class"
+        <Titlebar
+          title="Topics"
+          icons={this.icons}
         />
       </div>
     );
   }
 };
 
-export default withStyles(styles)(Classes);
+export default fp.compose(
+  withRouter,
+  withStyles(styles),
+)(Topics);

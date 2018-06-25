@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
-import ClassContainer from './ClassContainer';
-import CreateClassForm from './CreateClassForm';
 import Titlebar from '../../../../components/Titlebar';
 
 const styles = {
@@ -13,7 +11,7 @@ const styles = {
   },
 };
 
-class Classes extends Component {
+class Semesters extends Component {
   state = { isModalOpen: false };
 
   get icons() {
@@ -22,7 +20,7 @@ class Classes extends Component {
     return [
       {
         id: 1,
-        toolTipContent: "Add class",
+        toolTipContent: "Add semester",
         Component: AddCircleOutline,
         className: classes.icon,
         onClick: this.handleIconClick, 
@@ -40,16 +38,10 @@ class Classes extends Component {
 
     return (
       <div>
-        <Titlebar title="Classes" icons={this.icons} />
-        <ClassContainer />
-        <CreateClassForm
-          open={isModalOpen} 
-          onModalClose={this.handleIconClick}
-          title="Create a new class"
-        />
+        <Titlebar title="Semesters" icons={this.icons} />
       </div>
     );
   }
 };
 
-export default withStyles(styles)(Classes);
+export default withStyles(styles)(Semesters);

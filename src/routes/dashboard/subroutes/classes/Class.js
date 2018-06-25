@@ -1,5 +1,7 @@
+import fp from 'lodash/fp';
 import cn from 'classnames';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 
@@ -17,7 +19,10 @@ const styles = {
     marginRight: 15,
     marginTop: 15,
   },
-  name: {
+  title: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
     color: '#b0b0b0',
     fontSize: 12,
     fontWeight: 700,
@@ -40,25 +45,33 @@ const styles = {
   },
 };
 
-class Category extends React.Component {
+class Class extends React.Component {
   state = { isHovered: false };
 
   handleMouseOver = () => this.setState(prevState => ({
     isHovered: !prevState.isHovered,
   }));
 
+  handlePushHistory = () => {
+    const { history, id } = this.props;
+
+    return history.push(`/topics/${id}`);
+  };
+
   render() {
-    const { classes, name, description } = this.props;
+    const { classes, name, description, date } = this.props;
     const { isHovered } = this.state;
 
     return (
       <div
+        onClick={this.handlePushHistory}
         className={classes.card}
         onMouseLeave={this.handleMouseOver}
         onMouseEnter={this.handleMouseOver}
       >
-        <div className={classes.name}>
-          {name}
+        <div className={classes.title}>
+          <span>{name}</span>
+          <span>{date}</span>
         </div>
         <hr className={classes.hr} />
         <div>
@@ -74,4 +87,7 @@ class Category extends React.Component {
   }
 }
 
-export default withStyles(styles)(Category);
+export default fp.compose(
+  withRouter,
+  withStyles(styles),
+)(Class);
