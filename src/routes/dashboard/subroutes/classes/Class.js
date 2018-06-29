@@ -53,14 +53,16 @@ class Class extends React.Component {
   }));
 
   handlePushHistory = () => {
-    const { history, id } = this.props;
+    const { history, classObject } = this.props;
 
-    return history.push(`/topics/${id}`);
+    return history.push(`/topics/${classObject.id}`);
   };
 
   render() {
-    const { classes, name, description, date } = this.props;
+    const { classes, classObject, onClassEdit } = this.props;
     const { isHovered } = this.state;
+
+    const { name, date, description } = classObject;
 
     return (
       <div

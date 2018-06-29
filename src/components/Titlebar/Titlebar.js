@@ -1,5 +1,6 @@
 import React from 'react';
 import fp from 'lodash/fp';
+import { NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -30,6 +31,20 @@ const styles = {
     textAlign: 'left',
     fontSize: 16,
     fontWeight: 700,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  crumbs: {
+    marginLeft: 10,
+    color: '#ccc',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#ccc',
+    marginLeft: 10,
+    '&:hover': {
+      color: '#bbb',
+    },
   },
 };
 
@@ -54,14 +69,31 @@ const mapIcons = classes => fp.map(icon => (
   </div>
 ));
 
+const mapBreadCrumbs = classes => fp.map(crumb => (
+  <div>
+    > 
+    <NavLink
+      className={classes.link}
+      to={crumb.link}
+    >
+      {crumb.name}
+    </NavLink>
+  </div>
+));
+
 const Titlebar = props => {
-  const { classes, icons = [], title = "Title" } = props;
+  const { classes, icons = [], title = "Title", breadCrumbs } = props;
+
+  console.log(breadCrumbs);
 
   return (
     <AppBar className={classes.root} position="static">
       <Toolbar className={classes.titleBar}>
         <Typography className={classes.title}>
           {title}
+          <div className={classes.crumbs}>
+            {mapBreadCrumbs(classes)(breadCrumbs)}
+          </div>
         </Typography>
         <Typography>
           {mapIcons(classes)(icons)}

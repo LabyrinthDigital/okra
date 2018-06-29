@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
+import ClassForm from './ClassForm';
 import ClassContainer from './ClassContainer';
-import CreateClassForm from './CreateClassForm';
 import Titlebar from '../../../../components/Titlebar';
 
 const styles = {
@@ -14,7 +14,11 @@ const styles = {
 };
 
 class Classes extends Component {
-  state = { isModalOpen: false };
+  state = {
+    isModalOpen: false,
+    isFormEditing: false,
+    classEdited: null,
+  };
 
   get icons() {
     const { classes } = this.props;
@@ -34,18 +38,35 @@ class Classes extends Component {
     isModalOpen: !prevState.isModalOpen,
   }));
 
+  handleEditModalClose = () => this.setState({
+    isFormEditing: false,
+    classEdited: null,
+  });
+
+  handleModalIsEditing = classEdited => () => 
+    this.setState({
+      isFormEditing: true,
+      classEdited,
+    });
+
   render() {
-    const { isModalOpen } = this.state;
+    const { isModalOpen, isFormEditing, classEdited } = this.state;
     const { classes } = this.props;
 
     return (
       <div>
         <Titlebar title="Classes" icons={this.icons} />
-        <ClassContainer />
-        <CreateClassForm
-          open={isModalOpen} 
-          onModalClose={this.handleIconClick}
-          title="Create a new class"
+        <ClassContainer onClassEdit={this.handleModalIsEditing} />
+        <ClassForm
+          open={isModalOpen || isFormEditing}
+          onModalClose={isFormEditing
+            ? this.handleEditModalClose
+            : this.handleIconClick
+          }
+          title={classEdited
+            ? `Editing class ${classEdited.name}`
+            : "Create a new class"
+          }
         />
       </div>
     );

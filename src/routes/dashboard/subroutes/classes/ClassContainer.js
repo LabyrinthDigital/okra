@@ -12,10 +12,11 @@ const styles = {
   },
 };
 
-const mapClassesToClassComponent = fp.map(classObject => (
+const mapClassesToClassComponent = props => fp.map(classObject => (
   <ClassComponent
     key={classObject.id}
-    {...classObject}
+    classObject={classObject}
+    onClassEdit={props.onClassEdit}    
   />
 ));
 
@@ -24,7 +25,7 @@ const CategoryContainer = props => {
 
   return (
     <div className={classes.root}>
-      {mapClassesToClassComponent(semesterClasses)}
+      {mapClassesToClassComponent(props)(semesterClasses)}
     </div>
   );
 };
