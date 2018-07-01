@@ -24,7 +24,25 @@ const styles = {
     backgroundColor: '#fff',
     boxShadow: 'rgba(0, 0, 0, 0.06) 0px 2px 4px 0px',
   },
+  header: {
+    fontWeight: 700,
+  },
 };
+
+const MOCK_DATA = [
+  {
+    id: 1,
+    name: 'Test',
+    description: 'Test description',
+    days: 25,
+  },
+  {
+    id: 2,
+    name: 'TestTwo',
+    description: 'Test description two',
+    days: 26,
+  },
+]
 
 class Topics extends Component {
   state = { isModalOpen: false };
@@ -40,6 +58,34 @@ class Topics extends Component {
         className: classes.icon,
         onClick: this.handleIconClick, 
       }
+    ];
+  }
+
+  get headers() {
+    const { classes } = this.props;
+
+    return [
+      {
+        title: 'Name',
+        key: 'name',
+        className: classes.header,
+      },
+      {
+        title: 'Description',
+        key: 'description',
+        className: classes.header,
+      },
+      {
+        title: 'Days planned',
+        key: 'days',
+        className: classes.header,
+      },
+      {
+        title: 'Edit',
+        key: 'edit',
+        Component: <div>hur</div>,
+        className: classes.header,
+      },
     ];
   }
 
@@ -62,8 +108,6 @@ class Topics extends Component {
     const { isModalOpen } = this.state;
     const { classes, match } = this.props;
 
-    console.log('lel', this.props);
-
     return (
       <div className={classes.root}>
         <Titlebar
@@ -73,7 +117,10 @@ class Topics extends Component {
         />
         <div className={classes.tableRoot}>
           <div className={classes.tableContainer}>
-            <Table />
+            <Table
+              data={MOCK_DATA}
+              headers={this.headers} 
+            />
           </div>
         </div>
       </div>

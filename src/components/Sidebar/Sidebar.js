@@ -122,6 +122,7 @@ const links = [
 const mapLinksToNavLinks = ({ isSidebarOpen }) =>
   classes => fp.map(({ Link, to, exact, title }) => (
     <NavLink
+      key={title}
       exact={exact}
       activeClassName={classes.activeLink}
       to={to}

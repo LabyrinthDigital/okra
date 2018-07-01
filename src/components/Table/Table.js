@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import React from 'react';
+import fp from 'lodash/fp';
 import Table from '@material-ui/core/Table';
 import Checkbox from '@material-ui/core/Checkbox';
 import TableRow from '@material-ui/core/TableRow';
@@ -12,32 +14,48 @@ const styles = {
 
 };
 
+const mapTableHeaders = fp.map(header => (
+  <TableCell className={header.className} key={header.title}>
+    {header.title}
+  </TableCell>
+));
+
+const mapTableCells = props => row => fp.map(header => {
+  if (row[header.key]) {
+    return (
+      <TableCell key={_.get(row, `${row[header.key]}.id`)}>
+        {row[header.key]}
+      </TableCell>
+    )
+  }
+
+  if (header.Component) {
+    return (
+      <TableCell key={header.key}>
+        {header.Component}
+      </TableCell>
+    );
+  }
+
+  return null;
+});
+
 const TableComponent = props => {
-  const { classes } = props;
+  const { classes, headers, data } = props;
 
   return (
     <Table>
       <TableBody>
         <TableRow role="checkbox">
-          <TableCell padding="checkbox">
-            Edit <Checkbox checked />
-          </TableCell>
-          <TableCell component="th" scope="row">
-            Name
-          </TableCell>
-          <TableCell numeric>Description</TableCell>
-          <TableCell numeric>Days Planned</TableCell>
+          {mapTableHeaders(headers)}
         </TableRow>
-        <TableRow role="checkbox">
-        <TableCell padding="checkbox">
-          <Checkbox checked />
-        </TableCell>
-        <TableCell component="th" scope="row">
-          Sewing
-        </TableCell>
-        <TableCell numeric>Sewing class for 08/2018</TableCell>
-        <TableCell numeric>23</TableCell>
-      </TableRow>
+        {
+          _.map(data, row => (
+            <TableRow key={row.id}>
+              {mapTableCells(props)(row)(headers)}
+            </TableRow>
+          ))
+        }
       </TableBody>
     </Table>
   );
